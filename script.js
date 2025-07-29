@@ -51,7 +51,7 @@ spinBtn.addEventListener('click', function () {
     dareBtn.style.display = 'none';
     selectedDareDiv.style.display = 'none';
     selectedDareDiv.textContent = '';
-    animateSlotScroll(names, selectedNameDiv, 2000, 60, 'Selected: ', function(selectedName) {
+    animateSlotScroll(names, selectedNameDiv, 4000, 60, 'Selected: ', function(selectedName) {
         dareBtn.style.display = 'inline-block';
         spinBtn.disabled = false;
     });
@@ -61,7 +61,7 @@ dareBtn.addEventListener('click', function () {
     if (dares.length > 0) {
         dareBtn.disabled = true;
         selectedDareDiv.style.display = 'block'; // Make visible before animation
-        animateSlotScroll(dares, selectedDareDiv, 2000, 60, 'Dare: ', function(selectedDare) {
+        animateSlotScroll(dares, selectedDareDiv, 4000, 60, 'Dare: ', function(selectedDare) {
             dareBtn.disabled = false;
         });
     }
