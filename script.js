@@ -277,9 +277,7 @@ const finalists = [
     "khushi",
     "ashu",
     "manan",
-    "Amishre",
-    "Ankita",
-    "Kunal",
+    "Amishree",
     "Aadhya"
 ];
 
@@ -303,6 +301,8 @@ selectedDareDiv.style.display = 'none';
 
 spinBtn.disabled = false;
 dareBtn.disabled = false;
+
+let currentSelectedName = null;
 
 function animateSlotScroll(items, targetDiv, duration = 2000, interval = 60, prefix = '', callback) {
     let elapsed = 0;
@@ -376,6 +376,7 @@ spinBtn.addEventListener('click', function () {
         // Show the name in the center in big letters
         selectedNameDiv.textContent = selectedName;
         selectedNameDiv.classList.add('show-center');
+        currentSelectedName = selectedName; // Store the selected name
     });
 });
 
@@ -390,10 +391,11 @@ dareBtn.addEventListener('click', function () {
         selectedDareDiv.classList.add('below-dare-btn', 'huge-dare');
         selectedNameDiv.classList.remove('show-center');
         selectedNameDiv.classList.add('move-up-name'); // Move name up for equal spacing
-        // Simple reveal: pick a random dare and fade it in
-        const finalIndex = Math.floor(Math.random() * dares.length);
+        // Pick the dare based on the selected name's serial number
+        let dareIndex = finalists.findIndex(name => name.toLowerCase() === currentSelectedName.toLowerCase());
+        if (dareIndex === -1) dareIndex = 0; // fallback if not found
         selectedDareDiv.style.opacity = 0;
-        selectedDareDiv.textContent = dares[finalIndex];
+        selectedDareDiv.textContent = dares[dareIndex];
         setTimeout(() => {
             selectedDareDiv.style.transition = 'opacity 0.8s';
             selectedDareDiv.style.opacity = 1;
