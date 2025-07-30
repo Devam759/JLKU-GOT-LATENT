@@ -55,7 +55,7 @@ body {
 }
 
 .big-result {
-    font-size: 6rem;
+    font-size: 7rem;
     font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
     color: #D39D55;
     text-shadow: 0 6px 32px #8D0B41cc, 0 2px 8px #8D0B4155;
@@ -101,6 +101,17 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
     transition: color 0.2s;
 }
 
+#selectedDare {
+    color: #D39D55 !important;
+    width: 90vw !important;
+    max-width: 1000px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    text-align: center;
+    white-space: normal;
+}
+
 @media (max-width: 900px) {
     .logo {
         max-width: 180px;
@@ -122,4 +133,94 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
     .result {
         font-size: 1.3rem;
     }
+}
+
+/* Animation classes for Judge Your Fate UI transitions */
+.move-left {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    margin: 0 !important;
+    max-width: 120px !important;
+    width: 120px !important;
+    min-width: 80px !important;
+    transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
+    z-index: 10;
+}
+
+.move-up {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.4);
+    transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
+    z-index: 11;
+}
+
+.show-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2.2);
+    font-size: 5vw !important;
+    color: #FFD700 !important;
+    text-shadow: 0 8px 40px #8D0B41cc, 0 2px 12px #8D0B4155;
+    z-index: 20;
+    transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
+    pointer-events: none;
+}
+
+.below-name {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 7vw); /* below the centered name, adjust as needed */
+    transform: translateX(-50%);
+    z-index: 21;
+    display: inline-block !important;
+    margin-top: 0 !important;
+}
+
+.below-name:hover, .below-name:focus {
+    transform: translateX(-50%);
+    color: #D39D55;
+    text-shadow: 0 2px 8px #8D0B41aa;
+}
+
+.move-up-name {
+    position: absolute;
+    left: 50%;
+    top: 20%; /* Move name higher for equal spacing */
+    transform: translateX(-50%);
+    font-size: 6rem !important;
+    color: #FFD700 !important;
+    text-shadow: 0 8px 40px #8D0B41cc, 0 2px 12px #8D0B4155;
+    z-index: 20;
+    transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
+    pointer-events: none;
+}
+
+.below-dare-btn {
+    position: absolute;
+    left: 50%;
+    top: 40%; /* Place dare below name, equal spacing */
+    transform: translateX(-50%);
+    z-index: 22;
+    display: block !important;
+    margin-top: 0 !important;
+    pointer-events: none;
+}
+
+.huge-dare {
+    font-size: 5rem !important;
+    color: #FFD700 !important;
+    text-shadow: 0 10px 50px #8D0B41cc, 0 4px 16px #8D0B4155;
+    letter-spacing: 4px;
+    font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
+    z-index: 30;
+    transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s;
 }
