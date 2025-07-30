@@ -334,6 +334,22 @@ function animateNameReveal(allNames, finalists, targetDiv, callback) {
             const finalIndex = Math.floor(Math.random() * finalists.length);
             targetDiv.textContent = finalists[finalIndex];
             if (callback) callback(finalists[finalIndex]);
+            // Play applause sound and fade out after 3 seconds
+            applauseAudio.currentTime = 0;
+            applauseAudio.volume = 1;
+            applauseAudio.play();
+            setTimeout(() => {
+                // Fade out applause over 1 second
+                let fadeInterval = setInterval(() => {
+                    if (applauseAudio.volume > 0.05) {
+                        applauseAudio.volume -= 0.05;
+                    } else {
+                        applauseAudio.volume = 0;
+                        applauseAudio.pause();
+                        clearInterval(fadeInterval);
+                    }
+                }, 50);
+            }, 3000);
             return;
         }
         setTimeout(() => {
@@ -349,6 +365,10 @@ function animateNameReveal(allNames, finalists, targetDiv, callback) {
             } else if (elapsed < 10000) {
                 scheduleNext(200); // 0.2s per name for next 2s
             } else {
+                if (elapsed === 10000) {
+                    riserAudio.currentTime = 0;
+                    riserAudio.play();
+                }
                 scheduleNext(1000); // 1s per name for last 5s
             }
         }, interval);
@@ -403,3 +423,6 @@ dareBtn.addEventListener('click', function () {
         }, 50);
     }
 });
+
+const riserAudio = new Audio('assets/Riser Sound Effect.mp3');
+const applauseAudio = new Audio('assets/Applause Sound Effect.mp3');
