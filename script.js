@@ -382,7 +382,7 @@ spinBtn.addEventListener('click', function () {
     document.querySelector('.logo').classList.add('move-left');
     spinBtn.classList.add('move-up');
     // Remove any previous name display class
-    selectedNameDiv.classList.remove('show-center');
+    selectedNameDiv.classList.remove('show-center', 'show-center-with-dare');
     spinBtn.disabled = true;
     spinBtn.style.display = 'none'; // HIDE after click
     dareBtn.style.display = 'none';
@@ -407,19 +407,22 @@ dareBtn.addEventListener('click', function () {
         setTimeout(() => {
             dareBtn.style.display = 'none';
         }, 500); // Match the transition duration
-        selectedDareDiv.style.display = 'block'; // Make visible before animation
-        selectedDareDiv.classList.add('below-dare-btn', 'huge-dare');
-        selectedNameDiv.classList.remove('show-center');
-        selectedNameDiv.classList.add('move-up-name'); // Move name up for equal spacing
+        
         // Pick the dare based on the selected name's serial number
         let dareIndex = finalists.findIndex(name => name.toLowerCase() === currentSelectedName.toLowerCase());
         if (dareIndex === -1) dareIndex = 0; // fallback if not found
-        selectedDareDiv.style.opacity = 0;
-        selectedDareDiv.textContent = dares[dareIndex];
+        const dareText = dares[dareIndex];
+
+        // Transition the class of selectedNameDiv and update innerHTML
+        selectedNameDiv.classList.remove('show-center');
+        selectedNameDiv.classList.add('show-center-with-dare');
+        selectedNameDiv.innerHTML = `<span class="contestant-name">${currentSelectedName}</span><span class="dare-colon"> : </span><span class="contestant-dare">${dareText}</span>`;
+        
         setTimeout(() => {
-            selectedDareDiv.style.transition = 'opacity 0.8s';
-            selectedDareDiv.style.opacity = 1;
-            // dareBtn.disabled = false; // Don't re-enable since it's hidden
+            const dareSpan = selectedNameDiv.querySelector('.contestant-dare');
+            if (dareSpan) {
+                dareSpan.classList.add('visible');
+            }
         }, 50);
     }
 });
