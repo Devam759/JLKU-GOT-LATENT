@@ -313,7 +313,7 @@ async function loadCSVData() {
         console.error('Error loading CSV data, falling back to hardcoded data:', error);
     }
 }
-loadCSVData();
+// loadCSVData(); // Commented out to run with original hardcoded data instead of the test CSV entries
 
 const spinBtn = document.getElementById('spinBtn');
 const dareBtn = document.getElementById('dareBtn');
