@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 body {
-    background: #000000;
+    background: linear-gradient(to bottom, #0f2042 0%, #000000 50%, #470d18 100%);
+    background-attachment: fixed;
     color: #fff;
     font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
     min-height: 100vh;

@@ -1,5 +1,5 @@
 // Hardcoded names and dares
-const names = [
+let names = [
     "Shreyansh Jangir",
     "Meenakshi Vydianathan",
     "Nishant bhargava",
@@ -272,7 +272,7 @@ const names = [
 ];
 
 // Add the finalists array (special list)
-const finalists = [
+let finalists = [
     "devam",
     "khushi",
     "ashu",
@@ -282,7 +282,7 @@ const finalists = [
 ];
 
 
-const dares = [
+let dares = [
     "Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
     "Do 10 jumping jacks Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
     "Tell a joke Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
@@ -290,6 +290,30 @@ const dares = [
     "Imitate a celebrity Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
     "Share an embarrassing story"
 ];
+
+// Global CSV data holder
+let csvEntries = [];
+
+async function loadCSVData() {
+    try {
+        const response = await fetch('assets/Dare_Entries_150.csv');
+        const csvText = await response.text();
+        const workbook = XLSX.read(csvText, { type: 'string' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        csvEntries = XLSX.utils.sheet_to_json(worksheet);
+        
+        if (csvEntries.length > 0) {
+            // Update names and finalists
+            names = csvEntries.map(entry => entry['Form Filler Name']).filter(Boolean);
+            finalists = [...names]; // All form filler names are candidates
+            console.log(`Successfully loaded ${csvEntries.length} entries from CSV.`);
+        }
+    } catch (error) {
+        console.error('Error loading CSV data, falling back to hardcoded data:', error);
+    }
+}
+loadCSVData();
 
 const spinBtn = document.getElementById('spinBtn');
 const dareBtn = document.getElementById('dareBtn');
@@ -408,10 +432,16 @@ dareBtn.addEventListener('click', function () {
             dareBtn.style.display = 'none';
         }, 500); // Match the transition duration
         
-        // Pick the dare based on the selected name's serial number
-        let dareIndex = finalists.findIndex(name => name.toLowerCase() === currentSelectedName.toLowerCase());
-        if (dareIndex === -1) dareIndex = 0; // fallback if not found
-        const dareText = dares[dareIndex];
+        // Pick the dare based on the CSV data if loaded, otherwise fallback to hardcoded dares
+        let dareText = '';
+        const selectedEntry = csvEntries.find(entry => entry['Form Filler Name'] && entry['Form Filler Name'].toLowerCase() === currentSelectedName.toLowerCase());
+        if (selectedEntry) {
+            dareText = selectedEntry['Dare for Friend'];
+        } else {
+            let dareIndex = finalists.findIndex(name => name.toLowerCase() === currentSelectedName.toLowerCase());
+            if (dareIndex === -1) dareIndex = 0; // fallback if not found
+            dareText = dares[dareIndex];
+        }
 
         // Transition the class of selectedNameDiv and update innerHTML
         selectedNameDiv.classList.remove('show-center');
