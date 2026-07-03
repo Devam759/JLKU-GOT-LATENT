@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 body {
-    background: linear-gradient(to bottom, #0f2042 0%, #000000 30%, #000000 70%, #470d18 100%);
-    background-attachment: fixed;
+    background: #000000;
     color: #fff;
     font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
     min-height: 100vh;
@@ -22,8 +21,8 @@ body {
 .logo {
     display: block;
     margin: 40px auto 32px auto;
-    max-width: 500px;
-    width: 60vw;
+    max-width: 650px;
+    width: 75vw;
     min-width: 180px;
     height: auto;
     border-radius: 0;
@@ -111,8 +110,8 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
 
 @media (max-width: 900px) {
     .logo {
-        max-width: 250px;
-        width: 70vw;
+        max-width: 380px;
+        width: 85vw;
         margin: 20px auto 18px auto;
     }
     #spinBtn {
