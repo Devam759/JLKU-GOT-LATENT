@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 body {
-    background: #000000;
+    background-color: #1a040b; /* Deep maroon velvet base tone (kept intact underneath) */
     color: #fff;
     font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
     min-height: 100vh;
@@ -10,6 +10,93 @@ body {
     align-items: center;
     justify-content: center;
     overflow-x: hidden;   /* prevent horizontal scroll always */
+}
+
+/* Photo-realistic Curtain Overlay */
+.curtain-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -2; /* Stays securely behind the red/blue footlights (-1) */
+    pointer-events: none;
+    
+    background-image: 
+        /* 1. Diagonal Fabric Sheen/Reflection (mimicking velvet pile) */
+        linear-gradient(115deg, rgba(255, 255, 255, 0.015) 0%, transparent 40%, rgba(255, 255, 255, 0.005) 80%, transparent 100%),
+        
+        /* 2. Top Curtain Rod Ambient Shadow */
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.6) 10%, transparent 35%),
+        
+        /* 3. Deep Edge Vignette for realistic room depth */
+        radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.85) 100%),
+        
+        /* 4. Primary Rounded 3D Folds (responsive vw sizing) */
+        repeating-linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.9) 0vw,
+            rgba(0, 0, 0, 0.5) 2vw,
+            rgba(0, 0, 0, 0.2) 3.5vw,
+            transparent 5vw,
+            rgba(0, 0, 0, 0.2) 6.5vw,
+            rgba(0, 0, 0, 0.5) 8vw,
+            rgba(0, 0, 0, 0.9) 10vw
+        ),
+        
+        /* 5. Secondary Asymmetrical Folds (breaks robotic uniformity) */
+        repeating-linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.6) 0vw,
+            rgba(0, 0, 0, 0.3) 3vw,
+            rgba(0, 0, 0, 0.1) 6vw,
+            transparent 8.5vw,
+            rgba(0, 0, 0, 0.1) 11vw,
+            rgba(0, 0, 0, 0.3) 14vw,
+            rgba(0, 0, 0, 0.6) 17vw
+        );
+}
+
+/* Fabric Grain Texture Layer */
+.curtain-texture {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    mix-blend-mode: multiply; /* Blends dark SVG noise perfectly into the velvet */
+    opacity: 0.5; /* Controls intensity of the grain */
+}
+
+/* Ambient Cinematic Stage Lighting */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    top: -10%; left: -10%; right: -10%; bottom: -10%; 
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform, opacity;
+    filter: blur(60px); /* Smoother glow blending */
+}
+
+/* Season 2 Red Stage Lights (Bottom Corners) */
+body::before {
+    background: 
+        radial-gradient(circle at 5% 110%, rgba(220, 10, 40, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 95% 110%, rgba(220, 10, 40, 0.35) 0%, transparent 50%);
+    animation: pulseRed 8s ease-in-out infinite alternate;
+}
+
+/* Season 2 Blue Stage Light (Bottom Center) */
+body::after {
+    background: radial-gradient(circle at 50% 110%, rgba(20, 100, 220, 0.45) 0%, transparent 55%);
+    animation: pulseBlue 10s ease-in-out infinite alternate;
+}
+
+@keyframes pulseRed {
+    0%   { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 0.9; transform: scale(1.02); }
+}
+
+@keyframes pulseBlue {
+    0%   { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 0.9; transform: scale(1.03); }
 }
 
 .container {
@@ -183,8 +270,8 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
     margin-top: 0 !important;
 }
 
-.below-name:hover, .below-name:focus {
-    transform: translateX(-50%);
+#dareBtn.below-name:hover, #dareBtn.below-name:focus {
+    transform: translateX(calc(-50% + 35px)); /* More pronounced slide effect! */
     color: #D39D55;
 }
 
