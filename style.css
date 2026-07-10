@@ -9,6 +9,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;   /* prevent horizontal scroll always */
 }
 
 .container {
@@ -29,6 +30,18 @@ body {
     box-shadow: none;
     background: none;
     padding: 0;
+    will-change: transform, opacity;
+}
+
+/* Logo final resting state — glow after settling */
+.logo-settled {
+    z-index: 10;
+    animation: logoIdleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoIdleGlow {
+    0%   { filter: drop-shadow(0 0 8px rgba(211, 157, 85, 0.2)); }
+    100% { filter: drop-shadow(0 0 18px rgba(211, 157, 85, 0.45)); }
 }
 
 #spinBtn {
@@ -114,6 +127,12 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
         width: 85vw;
         margin: 20px auto 18px auto;
     }
+    .logo-settled {
+        left: 20px;
+        top: 20px;
+        width: 80px !important;
+        max-width: 80px !important;
+    }
     #spinBtn {
         font-size: 2.2rem;
         padding: 18px 0;
@@ -131,25 +150,14 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
     }
 }
 
-/* Animation classes for Judge Your Fate UI transitions */
-.move-left {
-    position: absolute;
-    left: 40px;
-    top: 40px;
-    margin: 0 !important;
-    max-width: 120px !important;
-    width: 120px !important;
-    min-width: 80px !important;
-    transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
-    z-index: 10;
-}
+/* Button fade-up animation */
 
 .move-up {
     position: absolute;
     top: 40px;
     left: 50%;
     transform: translateX(-50%) scale(0.4);
-    transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
     z-index: 11;
 }
 
@@ -219,18 +227,22 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
 
 /* Contestant name and dare on the same line styling */
 .show-center-with-dare {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1.6);
-    font-size: 2.8vw !important;
-    width: 95vw;
-    max-width: 1200px;
+    transform: translate(-50%, -50%);
+    font-size: clamp(1.2rem, 3.5vw, 3rem) !important;
+    width: 88vw;
+    max-width: 960px;
+    box-sizing: border-box;
     text-align: center;
     z-index: 20;
     transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
     pointer-events: none;
-    line-height: 1.3;
+    line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .contestant-name {
@@ -245,8 +257,8 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
 .contestant-dare {
     color: #FFFFFF;
     opacity: 0;
-    transform: translateX(30px);
-    display: inline-block;
+    transform: translateX(20px);
+    display: inline;         /* inline so it wraps naturally with the name */
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
@@ -262,7 +274,7 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
 
 @media (max-width: 900px) {
     .show-center-with-dare {
-        font-size: 4.8vw !important;
-        transform: translate(-50%, -50%) scale(1.2);
+        font-size: clamp(1rem, 4.5vw, 1.8rem) !important;
+        width: 92vw;
     }
 }
