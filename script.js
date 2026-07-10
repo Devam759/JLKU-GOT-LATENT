@@ -402,8 +402,54 @@ function animateNameReveal(allNames, finalists, targetDiv, callback) {
 }
 
 spinBtn.addEventListener('click', function () {
-    // Animate logo and button on first click
-    document.querySelector('.logo').classList.add('move-left');
+    // ── Smooth logo shrink + move to top-left ──
+    const logo = document.querySelector('.logo');
+    const rect = logo.getBoundingClientRect();
+
+    // Step 1: Pin logo as fixed at EXACT current visual position (no visible change)
+    logo.style.willChange = 'transform';    // promote to GPU layer before animation
+    logo.style.position = 'fixed';
+    logo.style.left   = rect.left + 'px';
+    logo.style.top    = rect.top  + 'px';
+    logo.style.width  = rect.width + 'px';
+    logo.style.maxWidth = 'none';
+    logo.style.minWidth = 'unset';
+    logo.style.margin = '0';
+    logo.style.transformOrigin = 'top left'; // scale from top-left corner — math is simple
+    logo.style.zIndex = '10';
+
+    // Step 2: Calculate how far to translate and scale
+    const finalLeft  = 40;
+    const finalTop   = 40;
+    const finalWidth = 120;
+    const tx    = finalLeft - rect.left;
+    const ty    = finalTop  - rect.top;
+    const scale = finalWidth / rect.width;
+
+    // Step 3: Animate via transform only — translate3d forces GPU compositor layer
+    const anim = logo.animate([
+        { transform: 'translate3d(0px,   0px,   0) scale(1)',           offset: 0    }, // start
+        { transform: 'translate3d(0px,   0px,   0) scale(0.96)',        offset: 0.08 }, // micro-compress → gives spring-launch energy
+        { transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`, offset: 1  }  // final corner
+    ], {
+        duration: 850,
+        easing: 'cubic-bezier(0.16, 1, 0.3, 1)', // ease-out-expo: launches fast, decelerates smoothly
+        fill: 'forwards'
+    });
+
+    // Step 4: When done, commit exact final position as inline CSS then cancel (zero jump)
+    anim.onfinish = () => {
+        logo.style.left     = finalLeft  + 'px';
+        logo.style.top      = finalTop   + 'px';
+        logo.style.width    = finalWidth + 'px';
+        logo.style.maxWidth = finalWidth + 'px';
+        logo.style.transform = '';
+        logo.style.transformOrigin = '';
+        logo.style.willChange = 'auto';     // free GPU layer — animation done
+        anim.cancel();
+        logo.classList.add('logo-settled');
+    };
+
     spinBtn.classList.add('move-up');
     // Remove any previous name display class
     selectedNameDiv.classList.remove('show-center', 'show-center-with-dare');
