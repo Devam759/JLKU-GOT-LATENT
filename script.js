@@ -346,6 +346,9 @@ function animateSlotScroll(items, targetDiv, duration = 2000, interval = 60, pre
     }, interval);
 }
 
+// Load any previously picked names from session storage (persists across reloads)
+let pickedFinalists = JSON.parse(sessionStorage.getItem('pickedFinalists') || '[]');
+
 // Replace animateNameReveal with a new version that scrolls all names but lands on a finalist
 function animateNameReveal(allNames, finalists, targetDiv, callback) {
     let elapsed = 0;
@@ -355,9 +358,24 @@ function animateNameReveal(allNames, finalists, targetDiv, callback) {
     function scheduleNext(interval) {
         if (elapsed >= totalDuration) {
             // End, show final name from finalists
-            const finalIndex = Math.floor(Math.random() * finalists.length);
-            targetDiv.textContent = finalists[finalIndex];
-            if (callback) callback(finalists[finalIndex]);
+            let availableFinalists = finalists.filter(n => !pickedFinalists.includes(n));
+            
+            // If everyone has been picked, auto-reset the list
+            if (availableFinalists.length === 0) {
+                pickedFinalists = [];
+                availableFinalists = finalists;
+                alert("All contestants have been picked! The list has been automatically reset.");
+            }
+            
+            const finalIndex = Math.floor(Math.random() * availableFinalists.length);
+            const chosenName = availableFinalists[finalIndex];
+            
+            // Add to picked list and save to storage
+            pickedFinalists.push(chosenName);
+            sessionStorage.setItem('pickedFinalists', JSON.stringify(pickedFinalists));
+            
+            targetDiv.textContent = chosenName;
+            if (callback) callback(chosenName);
             // Play applause sound and fade out after 3 seconds
             applauseAudio.currentTime = 0;
             applauseAudio.volume = 1;
@@ -505,3 +523,14 @@ dareBtn.addEventListener('click', function () {
 
 const riserAudio = new Audio('assets/Riser Sound Effect.mp3');
 const applauseAudio = new Audio('assets/Applause Sound Effect.mp3');
+
+// ── RESET GAME SCRIPT ──
+// Press 'R' on the keyboard to completely reset the game state and picked names
+document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'r') {
+        if (confirm("Reset Game? This will clear the list of picked names and restore the main screen.")) {
+            sessionStorage.removeItem('pickedFinalists');
+            location.reload(); // Reloading the page cleanly resets all CSS and JS animation states
+        }
+    }
+});
