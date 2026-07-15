@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 body {
-    background-color: #1a040b; /* Deep maroon velvet base tone (kept intact underneath) */
+    background-color: #0b0213; /* Deep dark base */
+    background: linear-gradient(135deg, #050a24 0%, #30000a 100%); /* Cinematic blue-to-red dark gradient */
     color: #fff;
     font-family: 'Luckiest Guy', cursive, Arial, sans-serif;
     min-height: 100vh;
@@ -16,87 +17,37 @@ body {
 .curtain-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    z-index: -2; /* Stays securely behind the red/blue footlights (-1) */
+    z-index: -2; /* Stays securely behind everything */
     pointer-events: none;
     
+    /* True black overlay on top of the original vibrant image to keep contrast perfectly intact */
     background-image: 
-        /* 1. Diagonal Fabric Sheen/Reflection (mimicking velvet pile) */
-        linear-gradient(115deg, rgba(255, 255, 255, 0.015) 0%, transparent 40%, rgba(255, 255, 255, 0.005) 80%, transparent 100%),
-        
-        /* 2. Top Curtain Rod Ambient Shadow */
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.6) 10%, transparent 35%),
-        
-        /* 3. Deep Edge Vignette for realistic room depth */
-        radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.85) 100%),
-        
-        /* 4. Primary Rounded 3D Folds (responsive vw sizing) */
-        repeating-linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0.9) 0vw,
-            rgba(0, 0, 0, 0.5) 2vw,
-            rgba(0, 0, 0, 0.2) 3.5vw,
-            transparent 5vw,
-            rgba(0, 0, 0, 0.2) 6.5vw,
-            rgba(0, 0, 0, 0.5) 8vw,
-            rgba(0, 0, 0, 0.9) 10vw
-        ),
-        
-        /* 5. Secondary Asymmetrical Folds (breaks robotic uniformity) */
-        repeating-linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0.6) 0vw,
-            rgba(0, 0, 0, 0.3) 3vw,
-            rgba(0, 0, 0, 0.1) 6vw,
-            transparent 8.5vw,
-            rgba(0, 0, 0, 0.1) 11vw,
-            rgba(0, 0, 0, 0.3) 14vw,
-            rgba(0, 0, 0, 0.6) 17vw
-        );
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+        url('assets/netflix_bg.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 /* Fabric Grain Texture Layer */
 .curtain-texture {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    mix-blend-mode: multiply; /* Blends dark SVG noise perfectly into the velvet */
-    opacity: 0.5; /* Controls intensity of the grain */
+    display: none; /* Disabled: Using a high-quality photorealistic image instead */
 }
 
-/* Ambient Cinematic Stage Lighting */
+/* Cinematic Stage Lighting (Blue/Red) */
 body::before, body::after {
-    content: '';
-    position: fixed;
-    top: -10%; left: -10%; right: -10%; bottom: -10%; 
-    z-index: -1;
-    pointer-events: none;
-    will-change: transform, opacity;
-    filter: blur(60px); /* Smoother glow blending */
+    display: none; /* Disabled for the India's Got Latent exact match theme */
 }
 
-/* Season 2 Red Stage Lights (Bottom Corners) */
-body::before {
-    background: 
-        radial-gradient(circle at 5% 110%, rgba(220, 10, 40, 0.35) 0%, transparent 50%),
-        radial-gradient(circle at 95% 110%, rgba(220, 10, 40, 0.35) 0%, transparent 50%);
-    animation: pulseRed 8s ease-in-out infinite alternate;
+/* Old keyframes for stage lights kept here but unused */
+@keyframes pulseLights {
+    0%   { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0.95; transform: scale(1.05); }
 }
 
-/* Season 2 Blue Stage Light (Bottom Center) */
-body::after {
-    background: radial-gradient(circle at 50% 110%, rgba(20, 100, 220, 0.45) 0%, transparent 55%);
-    animation: pulseBlue 10s ease-in-out infinite alternate;
-}
-
-@keyframes pulseRed {
-    0%   { opacity: 0.7; transform: scale(1); }
-    100% { opacity: 0.9; transform: scale(1.02); }
-}
-
-@keyframes pulseBlue {
-    0%   { opacity: 0.7; transform: scale(1); }
-    100% { opacity: 0.9; transform: scale(1.03); }
+@keyframes pulseCenter {
+    0%   { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 0.8; transform: scale(1.03); }
 }
 
 .container {
@@ -252,8 +203,14 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(2.2);
-    font-size: 5vw !important;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 1000px;
+    text-align: center;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    font-size: clamp(2rem, 6vw, 6.5rem) !important;
     color: #FFD700 !important;
     z-index: 20;
     transition: all 0.8s cubic-bezier(0.77,0,0.175,1);
@@ -318,7 +275,7 @@ button:not(#spinBtn):hover, button:not(#spinBtn):focus {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: clamp(1.2rem, 3.5vw, 3rem) !important;
+    font-size: clamp(1rem, 2.8vw, 2.5rem) !important;
     width: 88vw;
     max-width: 960px;
     box-sizing: border-box;

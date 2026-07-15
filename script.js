@@ -1,431 +1,128 @@
-// Hardcoded names and dares
-let names = [
-    "Shreyansh Jangir",
-    "Meenakshi Vydianathan",
-    "Nishant bhargava",
-    "Aditi Agarwal",
-    "Aditya Chaudhary",
-    "Amit Ranjan Pradhan",
-    "Lakshita Tanwar",
-    "Amrit Agrawal",
-    "Chandan Prit Singh",
-    "ANKUSH PANDA",
-    "Pedapalli Bhaskar",
-    "Anoushka SIngh",
-    "Anirudh Choudhary",
-    "Aadrika Roy",
-    "Sirimamilla Abhishek",
-    "Parth Dhoot",
-    "NAKKALAPALLY OMRUTHIK",
-    "Vaibhav Jain",
-    "KANISHK GUPTA",
-    "Aditya Saxena",
-    "Nayana Tripathi",
-    "Mallareddi Charan",
-    "Prananya Khanna",
-    "Nikita Bhatia",
-    "Srijan Sharma",
-    "Sunay Kundalwal",
-    "Anandi Krishna Kolapkar",
-    "Avirishi Pandey",
-    "Nandini Rajawat",
-    "Shambhavi Singh",
-    "Himanshu",
-    "Riddhi sharma",
-    "Ashish Sharma",
-    "Abheek Sharma",
-    "Mrinal khandal",
-    "Samarth Singh",
-    "Samriddhi Singh",
-    "Swara Makwana",
-    "Rashi katiyar",
-    "MONISHA SHARMA",
-    "Pradhuman Thanvi",
-    "RUSHAM CHAUDHARY",
-    "Mohit Suwalka",
-    "pratiki agarwal",
-    "Aviral Sherawat",
-    "Valmiki Rishi",
-    "Ruchi choudhary",
-    "Rishabh kalwar",
-    "Eishit Gupta",
-    "Yashwardhan Khatri",
-    "Siddhi khandelwal",
-    "KAVIYAA N A",
-    "ABHYUDAY SINGH",
-    "Manan Verma",
-    "SAMARTH MYADAM",
-    "Kosuru sruthi",
-    "Kavya Gupta",
-    "DIVIT CHATURVEDI",
-    "Risha Saini",
-    "TARUSHI AGARWAL",
-    "Sudhi chaurasia",
-    "Himani Saraf",
-    "Kavya Rawat",
-    "Rishikesh Bhardwaj",
-    "Shivia Rawat",
-    "Aman Kumawat",
-    "Daksh soni",
-    "Arnav Rawat",
-    "Saanchi Vijayvergia",
-    "Mradul Bansal",
-    "Abigail Abraham",
-    "Tanishq Daiya",
-    "Pranjal Sharma",
-    "PARIHAAN KABRA",
-    "GOTTIMUKKALA VISHWAROOPA CHARY",
-    "Navyaa Sharma",
-    "Satyanarayana kumawat",
-    "Jayadeep Naga sai",
-    "Udit Mishra",
-    "Gouranshi Sharma",
-    "Saumya Agarwal",
-    "Khushi Sharma",
-    "Avneesh Kumar Dubey",
-    "Kallu Ashwin Reddy",
-    "Arshiyaa Yadav",
-    "Anukriti choudhary",
-    "Shafiuddin khan",
-    "Lakshya Gupta",
-    "Arnav Sharma",
-    "Krish Bhola",
-    "Yash Sharma",
-    "CHARVI SHARMA",
-    "Hardik kumawat",
-    "Abhimanyu singh katiyar",
-    "akshat bisht",
-    "NANDINI SHAH",
-    "Arham Bothra",
-    "Akshat Murarka",
-    "Nomish agarwal",
-    "Heramb Sharma",
-    "VAIBHAV CHARAN",
-    "Parth mundra",
-    "Aarna Agarwal",
-    "Ashutosh Gupta",
-    "Pari Nahata",
-    "Purvee dudheria",
-    "PRIYANSHI SINGHVI",
-    "Daksh Jain",
-    "Garvit Agrawal",
-    "Kunal Singh Shekhawat",
-    "YOGANT GUPTA",
-    "Yashvardhan Singh",
-    "Nawya dusad",
-    "Naina Dayaramani",
-    "PARI MALOO",
-    "Droni Sehgal",
-    "BADRINADH GORU",
-    "Aaron Augustine",
-    "VANSHIKA TAK",
-    "utkarsh bhargava",
-    "Priyanshu sharma",
-    "Yatharth Chaturvedi",
-    "Lalee gupta",
-    "ARUNIL JAIN",
-    "Anushka Bajaj",
-    "Prekshya Sharma",
-    "Tanmay sharma",
-    "Kapil Rathore",
-    "Yashica pareek",
-    "Saurav Tank",
-    "Dishika Pancholi",
-    "Priyansh dadhich",
-    "VANSH BHATIA",
-    "Shivang pareek",
-    "Akarsh Pareek",
-    "shivang singhal",
-    "Tisha Garg",
-    "Aditi sharma",
-    "Kartik Saini",
-    "Avika soni jain",
-    "Bhanu pratap singh",
-    "Bhavisha Sabnani",
-    "Azad singh",
-    "SAHIL KHAROL",
-    "Ananya Mittal",
-    "Sangeeth Addepalli",
-    "Saket Gurjar",
-    "Krish Khandelwal",
-    "Aditi",
-    "Purvi Naruka",
-    "Ankarla Varun Teja",
-    "Bhavya Jain",
-    "Swarn Vipin Joshi",
-    "Aarav Jain",
-    "Harshita Sharma",
-    "Suryavanshisridevi",
-    "Mahi Tripathi",
-    "Chinthamani Mukesh",
-    "Uduthala Ashwit",
-    "Rahul Gorani",
-    "NAVEEN THOLIYA",
-    "Himani Menghani",
-    "Vansh gupta",
-    "BHAVYA JAIN",
-    "Diya Agarwal",
-    "Manvi Singh",
-    "Ayush kherada",
-    "Ayush Jaiswal",
-    "Bhavishya",
-    "Aadya mittal",
-    "AANYA VERMA",
-    "ANUBHA SHARMA",
-    "Yuvraj Singh Rathore",
-    "Rohan Goyal",
-    "Aadipoojya Mehra",
-    "Manant Srivastava",
-    "Paavani Sahu",
-    "Shivam Srivastava",
-    "Komal verma",
-    "Anvi Vashist",
-    "Sakshi Pandey",
-    "Konda Trigun",
-    "Ayush Gadwal",
-    "yash pal kilka",
-    "Divyansh chopra",
-    "Shabd Srivastava",
-    "MANSI SOMANI",
-    "Ashutosh Yadav",
-    "Angel Maheshwari",
-    "Baratam Sankar Narayana",
-    "Pranjal Jain",
-    "Vansh Doshi",
-    "Jiya Dhanwani",
-    "YUVRAJ SINGH",
-    "Bhavya Doshi",
-    "Dharam Singh Choudhary",
-    "Niharika Chauhan",
-    "AALAP GOSWAMI",
-    "Ishan sharma",
-    "Priecy gandhi",
-    "Megh Singh Rathore",
-    "GORLE LESSANTH",
-    "Priyanshi Agnani",
-    "Sameer sharma",
-    "Manan",
-    "Jitendra",
-    "Anushri Falor",
-    "Shreya Sharma",
-    "shouryaveer bishnoi",
-    "Daksh Shukla",
-    "Tanvi Gupta",
-    "K.Nipun Prathisth Reddy",
-    "Kanika Suthar",
-    "Drashya Jain",
-    "Aditi Sharma",
-    "Suhani dashora",
-    "Nikita",
-    "Rajan kumawat",
-    "Ritik Sharma",
-    "Aman choudhary",
-    "Dewasi manish padmaram",
-    "Deepak",
-    "Sahiti Samskruti Miyapuram",
-    "Priyanshu kumar",
-    "Sanskriti gehlot",
-    "Raghuraj Singh Shekhawat",
-    "Pranjal jangid",
-    "BHANU PRATAP SINGH KHANGAROT",
-    "Rudrapal Singh Shekhawat",
-    "Varun Rao Thumula",
-    "Raghav sharma",
-    "Bhavya Raj Singh Sarangdevot",
-    "Chelsytanwar",
-    "Raghuraj jangid",
-    "Karan sharma",
-    "Purvi Jain",
-    "Mradul Saxena",
-    "Shreyansh mishra",
-    "Pawani sharma",
-    "Hitesh Choudhary",
-    "Ansh gupta",
-    "PURUSHOTTAM KUMAR SINGH",
-    "Muskan jangid",
-    "Medha Kumari",
-    "Aryan kumawat",
-    "Aman Anchaliya",
-    "Pratham Lalwani",
-    "Garvishtha Asnani",
-    "T ABHIRAMA KARTHIKEYA SREYAS",
-    "Devalapalli Veda prakash",
-    "Vansh Vaibhav Singh",
-    "Gandla Vipuleshwar",
-    "Harshul agarwal",
-    "Katyayani rathore",
-    "Himanshu Singh Chouhan",
-    "Tarun Kumar",
-    "Shreasth Chaturvedi",
-    "Kajal Agarwal",
-    "Rashi Chandnani",
-    "Harshwardhan Jakhar",
-    "SHINJINI MISRA",
-    "ATHARV MANDAL",
-    "Hemangi Sancheti",
-    "Yashwanth Chandaka",
-    "Chirag Negi",
-    "Pragya Verma",
-    "Abhishek",
-    "Ashish choudhary",
-    "Vibhor vyas"
+// Contestant Pool and Dares (Uncomment/comment entries to update the active pool)
+const csvEntries = [
+    { yourName: "Aarav Sharma", dare: "Sing the chorus of Baby by Justin Bieber in the canteen." },
+    { yourName: "Priya Singh", dare: "Ask a random student to rate your outfit out of 10." },
+    { yourName: "Rohan Gupta", dare: "Do the chicken dance for 30 seconds in the middle of the lawn." },
+    // { yourName: "Sneha Agarwal", dare: "Walk backwards until someone asks what you're doing." },
+    // { yourName: "Aditya Joshi", dare: "Propose dramatically to a tree and wait for its answer." },
+    // { yourName: "Ishita Bansal", dare: "Speak only in a fake British accent for the next 10 minutes." },
+    // { yourName: "Kabir Malhotra", dare: "Ask five strangers if they believe in aliens." },
+    // { yourName: "Neha Choudhary", dare: "Do your best Shah Rukh Khan pose and dialogue in public." },
+    // { yourName: "Arjun Meena", dare: "Call your best friend and sing Happy Birthday even if it isn't their birthday." },
+    // { yourName: "Mehak Saini", dare: "Compliment five random people without repeating the same compliment." },
+    // { yourName: "Vansh Goel", dare: "Pretend to be a motivational speaker for one minute in front of a group." },
+    // { yourName: "Simran Kaur", dare: "Do 20 jumping jacks while loudly counting backwards." },
+    // { yourName: "Nikhil Yadav", dare: "Ask a random person to teach you their best dance move." },
+    // { yourName: "Ritika Goyal", dare: "Recite the alphabet like you're giving an emotional movie speech." },
+    { yourName: "Sarthak Mittal", dare: "Freeze like a mannequin for one full minute wherever you are." }
 ];
 
-// Add the finalists array (special list)
-let finalists = [
-    "devam",
-    "khushi",
-    "ashu",
-    "manan",
-    "Amishree",
-    "Aadhya"
-];
+// Extract active names from uncommented entries
+const names = csvEntries.map(e => e.yourName).filter(Boolean);
 
-
-let dares = [
-    "Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
-    "Do 10 jumping jacks Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
-    "Tell a joke Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
-    "Dance for 30 seconds Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
-    "Imitate a celebrity Sing a song Sing a song Sing a song Sing a song Sing a song Sing a song",
-    "Share an embarrassing story"
-];
-
-// Global CSV data holder
-let csvEntries = [];
-
-async function loadCSVData() {
-    try {
-        const response = await fetch('assets/Dare_Entries_150.csv');
-        const csvText = await response.text();
-        const workbook = XLSX.read(csvText, { type: 'string' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        csvEntries = XLSX.utils.sheet_to_json(worksheet);
-        
-        if (csvEntries.length > 0) {
-            // Update names and finalists
-            names = csvEntries.map(entry => entry['Form Filler Name']).filter(Boolean);
-            finalists = [...names]; // All form filler names are candidates
-            console.log(`Successfully loaded ${csvEntries.length} entries from CSV.`);
-        }
-    } catch (error) {
-        console.error('Error loading CSV data, falling back to hardcoded data:', error);
-    }
-}
-// loadCSVData(); // Commented out to run with original hardcoded data instead of the test CSV entries
+let animationState = 'idle'; // 'idle', 'spinning', 'selected', 'revealed'
+let spinTimeoutId = null;
+let logoAnim = null;
+let currentSelectedName = null;
 
 const spinBtn = document.getElementById('spinBtn');
 const dareBtn = document.getElementById('dareBtn');
 const selectedNameDiv = document.getElementById('selectedName');
 const selectedDareDiv = document.getElementById('selectedDare');
 
-dareBtn.style.display = 'none';
-selectedDareDiv.style.display = 'none';
+const riserAudio = new Audio('assets/Riser Sound Effect.mp3');
+const applauseAudio = new Audio('assets/Applause Sound Effect.mp3');
 
-spinBtn.disabled = false;
-dareBtn.disabled = false;
-
-let currentSelectedName = null;
-
-function animateSlotScroll(items, targetDiv, duration = 2000, interval = 60, prefix = '', callback) {
-    let elapsed = 0;
-    let currentIndex = 0;
-    targetDiv.textContent = '';
-    const scrollInterval = setInterval(() => {
-        targetDiv.textContent = items[currentIndex];
-        currentIndex = (currentIndex + 1) % items.length;
-        elapsed += interval;
-        if (elapsed >= duration) {
-            clearInterval(scrollInterval);
-            // Pick a random item for the final result
-            const finalIndex = Math.floor(Math.random() * items.length);
-            targetDiv.textContent = prefix + items[finalIndex];
-            if (callback) callback(items[finalIndex]);
-        }
-    }, interval);
+function showError(message) {
+    selectedNameDiv.textContent = message;
+    selectedNameDiv.classList.add('show-center');
+    selectedNameDiv.style.color = '#ff4444'; // Red error text
 }
 
-// Load any previously picked names from session storage (persists across reloads)
-let pickedFinalists = JSON.parse(sessionStorage.getItem('pickedFinalists') || '[]');
+function selectNextContestant() {
+    if (names.length === 0) {
+        showError("No contestants available.");
+        return null;
+    }
+    
+    const finalIndex = Math.floor(Math.random() * names.length);
+    return names[finalIndex];
+}
 
-// Replace animateNameReveal with a new version that scrolls all names but lands on a finalist
-function animateNameReveal(allNames, finalists, targetDiv, callback) {
+function settleLogoInstantly() {
+    if (logoAnim) {
+        logoAnim.cancel();
+        logoAnim = null;
+    }
+    const logo = document.querySelector('.logo');
+    logo.style.position = 'fixed';
+    logo.style.left     = '40px';
+    logo.style.top      = '40px';
+    logo.style.width    = '120px';
+    logo.style.maxWidth = '120px';
+    logo.style.margin   = '0';
+    logo.style.transform = '';
+    logo.style.transformOrigin = '';
+    logo.style.willChange = 'auto';
+    logo.classList.add('logo-settled');
+}
+
+function animateNameReveal(allNames, targetName, targetDiv, callback) {
     let elapsed = 0;
     let totalDuration = 15000; // 15 seconds
     targetDiv.textContent = '';
 
     function scheduleNext(interval) {
-        if (elapsed >= totalDuration) {
-            // End, show final name from finalists
-            let availableFinalists = finalists.filter(n => !pickedFinalists.includes(n));
-            
-            // If everyone has been picked, auto-reset the list
-            if (availableFinalists.length === 0) {
-                pickedFinalists = [];
-                availableFinalists = finalists;
-                alert("All contestants have been picked! The list has been automatically reset.");
+        spinTimeoutId = setTimeout(() => {
+            if (elapsed >= totalDuration) {
+                targetDiv.textContent = targetName;
+                spinTimeoutId = null;
+                
+                // Stop riser audio
+                riserAudio.pause();
+                riserAudio.currentTime = 0;
+                
+                if (callback) callback(targetName);
+                return;
             }
-            
-            const finalIndex = Math.floor(Math.random() * availableFinalists.length);
-            const chosenName = availableFinalists[finalIndex];
-            
-            // Add to picked list and save to storage
-            pickedFinalists.push(chosenName);
-            sessionStorage.setItem('pickedFinalists', JSON.stringify(pickedFinalists));
-            
-            targetDiv.textContent = chosenName;
-            if (callback) callback(chosenName);
-            // Play applause sound and fade out after 3 seconds
-            applauseAudio.currentTime = 0;
-            applauseAudio.volume = 1;
-            applauseAudio.play();
-            setTimeout(() => {
-                // Fade out applause over 1 second
-                let fadeInterval = setInterval(() => {
-                    if (applauseAudio.volume > 0.05) {
-                        applauseAudio.volume -= 0.05;
-                    } else {
-                        applauseAudio.volume = 0;
-                        applauseAudio.pause();
-                        clearInterval(fadeInterval);
-                    }
-                }, 50);
-            }, 3000);
-            return;
-        }
-        setTimeout(() => {
-            // Show a random name from allNames each time
+
             const randomIndex = Math.floor(Math.random() * allNames.length);
             targetDiv.textContent = allNames[randomIndex];
             elapsed += interval;
-            // Determine next phase
+
             if (elapsed < 3000) {
-                scheduleNext(200); // 0.2s per name for first 3s
+                scheduleNext(200);
             } else if (elapsed < 8000) {
-                scheduleNext(50); // 0.05s per name for next 5s
+                scheduleNext(50);
             } else if (elapsed < 10000) {
-                scheduleNext(200); // 0.2s per name for next 2s
+                scheduleNext(200);
             } else {
                 if (elapsed === 10000) {
                     riserAudio.currentTime = 0;
                     riserAudio.play();
                 }
-                scheduleNext(1000); // 1s per name for last 5s
+                scheduleNext(1000);
             }
         }, interval);
     }
-    // Start first phase
+    
     scheduleNext(200);
 }
 
 spinBtn.addEventListener('click', function () {
-    // ── Smooth logo shrink + move to top-left ──
+    if (names.length === 0) {
+        showError("No contestants available.");
+        return;
+    }
+
+    currentSelectedName = selectNextContestant();
+    if (!currentSelectedName) return;
+
+    // Smooth logo movement animation
     const logo = document.querySelector('.logo');
     const rect = logo.getBoundingClientRect();
 
-    // Step 1: Pin logo as fixed at EXACT current visual position (no visible change)
-    logo.style.willChange = 'transform';    // promote to GPU layer before animation
+    logo.style.willChange = 'transform';
     logo.style.position = 'fixed';
     logo.style.left   = rect.left + 'px';
     logo.style.top    = rect.top  + 'px';
@@ -433,10 +130,9 @@ spinBtn.addEventListener('click', function () {
     logo.style.maxWidth = 'none';
     logo.style.minWidth = 'unset';
     logo.style.margin = '0';
-    logo.style.transformOrigin = 'top left'; // scale from top-left corner — math is simple
+    logo.style.transformOrigin = 'top left';
     logo.style.zIndex = '10';
 
-    // Step 2: Calculate how far to translate and scale
     const finalLeft  = 40;
     const finalTop   = 40;
     const finalWidth = 120;
@@ -444,93 +140,142 @@ spinBtn.addEventListener('click', function () {
     const ty    = finalTop  - rect.top;
     const scale = finalWidth / rect.width;
 
-    // Step 3: Animate via transform only — translate3d forces GPU compositor layer
-    const anim = logo.animate([
-        { transform: 'translate3d(0px,   0px,   0) scale(1)',           offset: 0    }, // start
-        { transform: 'translate3d(0px,   0px,   0) scale(0.96)',        offset: 0.08 }, // micro-compress → gives spring-launch energy
-        { transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`, offset: 1  }  // final corner
+    logoAnim = logo.animate([
+        { transform: 'translate3d(0px,   0px,   0) scale(1)',           offset: 0    },
+        { transform: 'translate3d(0px,   0px,   0) scale(0.96)',        offset: 0.08 },
+        { transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`, offset: 1  }
     ], {
         duration: 850,
-        easing: 'cubic-bezier(0.16, 1, 0.3, 1)', // ease-out-expo: launches fast, decelerates smoothly
+        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
         fill: 'forwards'
     });
 
-    // Step 4: When done, commit exact final position as inline CSS then cancel (zero jump)
-    anim.onfinish = () => {
+    logoAnim.onfinish = () => {
         logo.style.left     = finalLeft  + 'px';
         logo.style.top      = finalTop   + 'px';
         logo.style.width    = finalWidth + 'px';
         logo.style.maxWidth = finalWidth + 'px';
         logo.style.transform = '';
         logo.style.transformOrigin = '';
-        logo.style.willChange = 'auto';     // free GPU layer — animation done
-        anim.cancel();
+        logo.style.willChange = 'auto';
+        logoAnim.cancel();
+        logoAnim = null;
         logo.classList.add('logo-settled');
     };
 
     spinBtn.classList.add('move-up');
-    // Remove any previous name display class
     selectedNameDiv.classList.remove('show-center', 'show-center-with-dare');
+    selectedNameDiv.style.color = ''; // Reset error color if any
     spinBtn.disabled = true;
-    spinBtn.style.display = 'none'; // HIDE after click
+    spinBtn.style.display = 'none';
     dareBtn.style.display = 'none';
     selectedDareDiv.style.display = 'none';
     selectedDareDiv.textContent = '';
-    // Use custom name reveal animation
-    animateNameReveal(names, finalists, selectedNameDiv, function(selectedName) {
+    
+    animationState = 'spinning';
+
+    animateNameReveal(names, currentSelectedName, selectedNameDiv, function(selectedName) {
         dareBtn.style.display = 'inline-block';
         dareBtn.classList.add('below-name');
         spinBtn.disabled = false;
-        // Show the name in the center in big letters
+        
         selectedNameDiv.textContent = selectedName;
         selectedNameDiv.classList.add('show-center');
-        currentSelectedName = selectedName; // Store the selected name
+        
+        // Play applause sound
+        applauseAudio.currentTime = 0;
+        applauseAudio.volume = 1;
+        applauseAudio.play();
+        setTimeout(() => {
+            let fadeInterval = setInterval(() => {
+                if (applauseAudio.volume > 0.05) {
+                    applauseAudio.volume -= 0.05;
+                } else {
+                    applauseAudio.volume = 0;
+                    applauseAudio.pause();
+                    clearInterval(fadeInterval);
+                }
+            }, 50);
+        }, 3000);
+        
+        animationState = 'selected';
     });
 });
 
 dareBtn.addEventListener('click', function () {
-    if (dares.length > 0) {
-        dareBtn.disabled = true;
-        dareBtn.classList.add('fade-out');
-        setTimeout(() => {
-            dareBtn.style.display = 'none';
-        }, 500); // Match the transition duration
-        
-        // Pick the dare based on the CSV data if loaded, otherwise fallback to hardcoded dares
-        let dareText = '';
-        const selectedEntry = csvEntries.find(entry => entry['Form Filler Name'] && entry['Form Filler Name'].toLowerCase() === currentSelectedName.toLowerCase());
-        if (selectedEntry) {
-            dareText = selectedEntry['Dare for Friend'];
-        } else {
-            let dareIndex = finalists.findIndex(name => name.toLowerCase() === currentSelectedName.toLowerCase());
-            if (dareIndex === -1) dareIndex = 0; // fallback if not found
-            dareText = dares[dareIndex];
-        }
+    dareBtn.disabled = true;
+    dareBtn.classList.add('fade-out');
+    setTimeout(() => {
+        dareBtn.style.display = 'none';
+    }, 500);
 
-        // Transition the class of selectedNameDiv and update innerHTML
-        selectedNameDiv.classList.remove('show-center');
-        selectedNameDiv.classList.add('show-center-with-dare');
-        selectedNameDiv.innerHTML = `<span class="contestant-name">${currentSelectedName}</span><span class="dare-colon"> : </span><span class="contestant-dare">${dareText}</span>`;
-        
-        setTimeout(() => {
-            const dareSpan = selectedNameDiv.querySelector('.contestant-dare');
-            if (dareSpan) {
-                dareSpan.classList.add('visible');
-            }
-        }, 50);
-    }
+    revealDare();
 });
 
-const riserAudio = new Audio('assets/Riser Sound Effect.mp3');
-const applauseAudio = new Audio('assets/Applause Sound Effect.mp3');
-
-// ── RESET GAME SCRIPT ──
-// Press 'R' on the keyboard to completely reset the game state and picked names
-document.addEventListener('keydown', (e) => {
-    if (e.key.toLowerCase() === 'r') {
-        if (confirm("Reset Game? This will clear the list of picked names and restore the main screen.")) {
-            sessionStorage.removeItem('pickedFinalists');
-            location.reload(); // Reloading the page cleanly resets all CSS and JS animation states
+function revealDare() {
+    animationState = 'revealed';
+    
+    let dareText = '';
+    const selectedEntry = csvEntries.find(entry => entry.yourName && entry.yourName.toLowerCase() === currentSelectedName.toLowerCase());
+    if (selectedEntry) {
+        dareText = selectedEntry.dare;
+    }
+    
+    if (!dareText) {
+        dareText = "No dare assigned.";
+    }
+    
+    selectedNameDiv.classList.remove('show-center');
+    selectedNameDiv.classList.add('show-center-with-dare');
+    selectedNameDiv.innerHTML = `<span class="contestant-name">${currentSelectedName}</span><span class="dare-colon"> : </span><span class="contestant-dare">${dareText}</span>`;
+    
+    setTimeout(() => {
+        const dareSpan = selectedNameDiv.querySelector('.contestant-dare');
+        if (dareSpan) {
+            dareSpan.classList.add('visible');
         }
+    }, 50);
+}
+
+function skipToReveal() {
+    if (animationState !== 'spinning' && animationState !== 'selected') {
+        return;
+    }
+    
+    if (spinTimeoutId) {
+        clearTimeout(spinTimeoutId);
+        spinTimeoutId = null;
+    }
+    
+    riserAudio.pause();
+    riserAudio.currentTime = 0;
+    applauseAudio.pause();
+    applauseAudio.currentTime = 0;
+    
+    settleLogoInstantly();
+    
+    spinBtn.style.display = 'none';
+    dareBtn.style.display = 'none';
+    
+    revealDare();
+}
+
+function resetGame() {
+    location.reload();
+}
+
+document.addEventListener('keydown', (e) => {
+    const key = e.key.toLowerCase();
+    if (key === 'r') {
+        if (confirm("Reset UI? This will reload the screen back to initial state.")) {
+            resetGame();
+        }
+    } else if (key === ' ' || e.code === 'Space') {
+        if (spinBtn.style.display !== 'none' && !spinBtn.disabled) {
+            e.preventDefault();
+            spinBtn.click();
+        }
+    } else if (e.key === 'Escape') {
+        skipToReveal();
     }
 });
