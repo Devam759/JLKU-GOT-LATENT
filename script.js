@@ -1,24 +1,25 @@
-// Contestant Pool and Dares (Uncomment/comment entries to update the active pool)
+// Contestant Pool and Dares
+// To remove a contestant from the active pool, set active: false
 const csvEntries = [
-    { yourName: "Aarav Sharma", dare: "Sing the chorus of Baby by Justin Bieber in the canteen." },
-    { yourName: "Priya Singh", dare: "Ask a random student to rate your outfit out of 10." },
-    { yourName: "Rohan Gupta", dare: "Do the chicken dance for 30 seconds in the middle of the lawn." },
-    // { yourName: "Sneha Agarwal", dare: "Walk backwards until someone asks what you're doing." },
-    // { yourName: "Aditya Joshi", dare: "Propose dramatically to a tree and wait for its answer." },
-    // { yourName: "Ishita Bansal", dare: "Speak only in a fake British accent for the next 10 minutes." },
-    // { yourName: "Kabir Malhotra", dare: "Ask five strangers if they believe in aliens." },
-    // { yourName: "Neha Choudhary", dare: "Do your best Shah Rukh Khan pose and dialogue in public." },
-    // { yourName: "Arjun Meena", dare: "Call your best friend and sing Happy Birthday even if it isn't their birthday." },
-    // { yourName: "Mehak Saini", dare: "Compliment five random people without repeating the same compliment." },
-    // { yourName: "Vansh Goel", dare: "Pretend to be a motivational speaker for one minute in front of a group." },
-    // { yourName: "Simran Kaur", dare: "Do 20 jumping jacks while loudly counting backwards." },
-    // { yourName: "Nikhil Yadav", dare: "Ask a random person to teach you their best dance move." },
-    // { yourName: "Ritika Goyal", dare: "Recite the alphabet like you're giving an emotional movie speech." },
-    { yourName: "Sarthak Mittal", dare: "Freeze like a mannequin for one full minute wherever you are." }
+    { active: true,  yourName: "Aarav Sharma",     dare: "Sing the chorus of Baby by Justin Bieber in the canteen." },
+    { active: true,  yourName: "Priya Singh",       dare: "Ask a random student to rate your outfit out of 10." },
+    { active: true,  yourName: "Rohan Gupta",       dare: "Do the chicken dance for 30 seconds in the middle of the lawn." },
+    { active: true,  yourName: "Sneha Agarwal",     dare: "Walk backwards until someone asks what you're doing." },
+    { active: false,  yourName: "Aditya Joshi",      dare: "Propose dramatically to a tree and wait for its answer." },
+    { active: false,  yourName: "Ishita Bansal",     dare: "Speak only in a fake British accent for the next 10 minutes." },
+    { active: false,  yourName: "Kabir Malhotra",    dare: "Ask five strangers if they believe in aliens." },
+    { active: false,  yourName: "Neha Choudhary",    dare: "Do your best Shah Rukh Khan pose and dialogue in public." },
+    { active: false,  yourName: "Arjun Meena",       dare: "Call your best friend and sing Happy Birthday even if it isn't their birthday." },
+    { active: false,  yourName: "Mehak Saini",       dare: "Compliment five random people without repeating the same compliment." },
+    { active: false,  yourName: "Vansh Goel",        dare: "Pretend to be a motivational speaker for one minute in front of a group." },
+    { active: false,  yourName: "Simran Kaur",       dare: "Do 20 jumping jacks while loudly counting backwards." },
+    { active: false,  yourName: "Nikhil Yadav",      dare: "Ask a random person to teach you their best dance move." },
+    { active: false,  yourName: "Ritika Goyal",      dare: "Recite the alphabet like you're giving an emotional movie speech." },
+    { active: false,  yourName: "Sarthak Mittal",    dare: "Freeze like a mannequin for one full minute wherever you are." }
 ];
 
-// Extract active names from uncommented entries
-const names = csvEntries.map(e => e.yourName).filter(Boolean);
+// Only include entries explicitly marked as active
+const names = csvEntries.filter(e => e.active === true && e.yourName).map(e => e.yourName);
 
 let animationState = 'idle'; // 'idle', 'spinning', 'selected', 'revealed'
 let spinTimeoutId = null;
